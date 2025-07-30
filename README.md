@@ -11,11 +11,9 @@
 
 <br />
 
-I'm a self proclaimed developer
-
 **About me**
-
-- 💬 Ask me about anything [here](https://github.com/anuraghazra/anuraghazra/issues)
+- I'm a self proclaimed developer
+- 💬 Ask me about anything about this project [here](https://github.com/Kurt7275/bsit2-2-oop/issues)
 
 
 
