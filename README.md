@@ -5,8 +5,8 @@
   <div>
     <br>
     <img src="https://github-readme-stats.vercel.app/api?username=Kurt7275&show_icons=true&theme=radical&count_private=true&include_all_commits=true">
-    <img src="https://github-readme-streak-stats.herokuapp.com/api?user=Kurt7275&theme=radical">
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/api?username=Kurt7275&theme=radical">
+    <img src="https://github-readme-streak-stats.herokuapp.com/?user=Kurt7275&theme=radical">
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Kurt7275&theme=radical">
   </div>
 </details>
 
