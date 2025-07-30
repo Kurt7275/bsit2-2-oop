@@ -55,6 +55,5 @@ public class StudentGradeCalculator {
         System.out.printf("\nAverage Score  : %.2f\n", averageScore);
         System.out.println("Final Remarks  : " + remarks);
         System.out.println("==============================");
-
     }
 }
