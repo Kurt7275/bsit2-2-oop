@@ -10,6 +10,7 @@
 </p>
 
 <br />
+
 **About me**
 - I'm a self proclaimed developer
 - 💬 Ask me about anything about this project [here](https://github.com/Kurt7275/bsit2-2-oop/issues)
