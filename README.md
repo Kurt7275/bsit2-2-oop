@@ -6,11 +6,10 @@
 <p align="center">
   <!-- Typing SVG by DenverCoder1 - https://github.com/DenverCoder1/readme-typing-svg -->
   <a href="https://github.com/DenverCoder1/readme-typing-svg">
-    <img src="https://readme-typing-svg.demolab.com/?lines=This%20project%20is%20for%20school%20purposes%20only;Discord%20Bot%20Develooper;Liceo%20BSIT%20student;Always%20learning%20new%20things&font=Fira%20Code&center=true&width=440&height=45&color=f75c7e&vCenter=true&pause=1000&size=15" /></a>
+    <img src="https://readme-typing-svg.demolab.com/?lines=This%20project%20is%20for%20school%20purposes%20only;Discord%20Bot%20Develooper;Liceo%20BSIT%20student;Always%20learning%20new%20things&font=Fira%20Code&center=true&width=440&height=45&color=f75c7e&vCenter=true&pause=1000&size=18" /></a>
 </p>
 
 <br />
-
 **About me**
 - I'm a self proclaimed developer
 - 💬 Ask me about anything about this project [here](https://github.com/Kurt7275/bsit2-2-oop/issues)
