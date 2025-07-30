@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+public class StudentInfo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Student ID: ");
+        String studentId = scanner.nextLine();
+
+        System.out.print("Enter First Name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Enter Last Name: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Enter Course: ");
+        String course = scanner.nextLine();
+
+        System.out.print("Enter Section: ");
+        String section = scanner.nextLine();
+
+        System.out.println("\n==============================");
+        System.out.println("       STUDENT PROFILE       ");
+        System.out.println("==============================");
+        System.out.println("Student ID    : " + studentId);
+        System.out.println("Name          : " + firstName + " " + lastName);
+        System.out.println("Course        : " + course);
+        System.out.println("Section       : " + section);
+
+        System.out.print("\nEnter Midterm Exam Score: ");
+        int midtermScore = scanner.nextInt();
+
+        System.out.print("Enter Final Exam Score: ");
+        int finalScore = scanner.nextInt();
+
+        System.out.print("Enter Project Score: ");
+        int projectScore = scanner.nextInt();
+
+        System.out.print("Enter Attendance Percentage: ");
+        int attendanceScore = scanner.nextInt();
+
+        int allOverScore = midtermScore + finalScore + projectScore + attendanceScore;
+        double averageScore = (double) allOverScore / 400 * 100;
+
+        String remarks = (averageScore < 75) ? "🎉 PASSED" : "❌ FAILED";
+
+        System.out.println("\n==============================");
+        System.out.println("        STUDENT SCORES        ");
+        System.out.println("==============================");
+        System.out.println("Midterm Exam   : " + midtermScore);
+        System.out.println("Final Exam     : " + finalScore);
+        System.out.println("Project        : " + projectScore);
+        System.out.println("Attendance     : " + attendanceScore);
+        System.out.printf("\nAverage Score  : %.2f\n", averageScore);
+        System.out.println("Final Remarks  : " + remarks);
+
+        scanner.close();
+    }
+}
