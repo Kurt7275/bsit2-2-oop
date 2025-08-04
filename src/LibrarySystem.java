@@ -1,7 +1,7 @@
 public class LibrarySystem {
     public static void main(String[] args) {
         Book book1 = new Book("Demon Slayer", "Koyoharu Gotouge", 192);
-        Book book2 = new Book("Vagabond", "George Orwell", 328);
+        Book book2 = new Book("Vagabond", "Takehiko Inoue", 728);
         Book book3 = new Book("The Climber", "Shin-ichi Sakamoto", 448);
 
         book1.displayInfo();
