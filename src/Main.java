@@ -1,68 +1,21 @@
-class Student {
-    String name;
-    int age;
-    String course;
-    double grade1, grade2, grade3;
-
-    // Constructor
-    Student(String name, int age, String course, double grade1, double grade2, double grade3) {
-        this.name = name;
-        this.age = age;
-        this.course = course;
-        this.grade1 = grade1;
-        this.grade2 = grade2;
-        this.grade3 = grade3;
-    }
-
-    // Display student info
-    void displayInfo() {
-        System.out.println("Student Information:");
-        System.out.println("Name: " + name + ", Age: " + age + ", Course: " + course);
-        System.out.printf("Grades: %.1f, %.1f, %.1f\n", grade1, grade2, grade3);
-        System.out.printf("Average: %.2f\n", calculateAverage());
-        System.out.println("Letter Grade: " + getLetterGrade());
-        System.out.println("Status: " + (isPassing() ? "PASSING" : "FAILING"));
-        System.out.println();
-    }
-
-    // Calculate average of grades
-    double calculateAverage() {
-        return (grade1 + grade2 + grade3) / 3;
-    }
-
-    // Return letter grade
-    String getLetterGrade() {
-        double avg = calculateAverage();
-        if (avg >= 90) return "A";
-        else if (avg >= 80) return "B";
-        else if (avg >= 70) return "C";
-        else if (avg >= 60) return "D";
-        else return "F";
-    }
-
-    // Check if passing
-    boolean isPassing() {
-        return calculateAverage() >= 70;
-    }
-}
-
 public class Main {
     public static void main(String[] args) {
-        Student s1 = new Student("Alice", 20, "BSIT", 85.0, 90.0, 88.0);
-        Student s2 = new Student("Bob", 19, "BSCS", 92.0, 95.0, 89.0);
-        Student s3 = new Student("Charlie", 21, "BSIT", 65.0, 70.0, 68.0);
+        System.out.println("Bank Name: " + BankAccount.bankName);
+        System.out.printf("Interest Rate: %.1f%%%n%n", BankAccount.getInterestRatePercent());
 
-        Student[] students = {s1, s2, s3};
+        BankAccount acc1 = new BankAccount("John Doe", 1000.0);
+        BankAccount acc2 = new BankAccount("Jane Smith", 2500.0);
+        BankAccount acc3 = new BankAccount("Bob Johnson", 500.0);
 
-        int passingCount = 0;
+        System.out.println("\n═══ Account Operations ═══");
+        acc1.deposit(500.0);   // John Doe -> $1000 + $500 = $1500
+        acc2.withdraw(300.0);  // Jane Smith -> $2500 - $300 = $2200
 
-        for (Student s : students) {
-            s.displayInfo();
-            if (s.isPassing()) {
-                passingCount++;
-            }
-        }
+        System.out.println("\n═══ Interest Calculation ═══");
+        System.out.printf("%s's interest: $%.1f%n", acc1.getAccountHolderName(), acc1.calculateInterest());
+        System.out.printf("%s's interest: $%.1f%n", acc2.getAccountHolderName(), acc2.calculateInterest());
+        System.out.printf("%s's interest: $%.1f%n", acc3.getAccountHolderName(), acc3.calculateInterest());
 
-        System.out.println("Summary: " + passingCount + " out of " + students.length + " students are passing.");
+        System.out.println("\nTotal Accounts Created: " + BankAccount.totalAccounts);
     }
 }
