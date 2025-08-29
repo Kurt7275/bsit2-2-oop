@@ -1,68 +1,28 @@
-class Student {
-    String name;
-    int age;
-    String course;
-    double grade1, grade2, grade3;
-
-    // Constructor
-    Student(String name, int age, String course, double grade1, double grade2, double grade3) {
-        this.name = name;
-        this.age = age;
-        this.course = course;
-        this.grade1 = grade1;
-        this.grade2 = grade2;
-        this.grade3 = grade3;
-    }
-
-    // Display student info
-    void displayInfo() {
-        System.out.println("Student Information:");
-        System.out.println("Name: " + name + ", Age: " + age + ", Course: " + course);
-        System.out.printf("Grades: %.1f, %.1f, %.1f\n", grade1, grade2, grade3);
-        System.out.printf("Average: %.2f\n", calculateAverage());
-        System.out.println("Letter Grade: " + getLetterGrade());
-        System.out.println("Status: " + (isPassing() ? "PASSING" : "FAILING"));
-        System.out.println();
-    }
-
-    // Calculate average of grades
-    double calculateAverage() {
-        return (grade1 + grade2 + grade3) / 3;
-    }
-
-    // Return letter grade
-    String getLetterGrade() {
-        double avg = calculateAverage();
-        if (avg >= 90) return "A";
-        else if (avg >= 80) return "B";
-        else if (avg >= 70) return "C";
-        else if (avg >= 60) return "D";
-        else return "F";
-    }
-
-    // Check if passing
-    boolean isPassing() {
-        return calculateAverage() >= 70;
-    }
-}
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Student s1 = new Student("Alice", 20, "BSIT", 85.0, 90.0, 88.0);
-        Student s2 = new Student("Bob", 19, "BSCS", 92.0, 95.0, 89.0);
-        Student s3 = new Student("Charlie", 21, "BSIT", 65.0, 70.0, 68.0);
+        PostManager manager = new PostManager();
 
-        Student[] students = {s1, s2, s3};
+        String postTitle = "Java Programming Tips";
+        int engagement = manager.calculateEngagement(150, 75, 25);
+        String category = manager.getCategoryRating(engagement);
 
-        int passingCount = 0;
+        System.out.println(manager.getPostStats(postTitle, engagement));
+        System.out.println(manager.getPostStats(postTitle, engagement, category));
+        String[] hashtags = {"#java", "#coding", "#programming", "#java", "#tips"};
+        ArrayList<String> uniqueHashtags = manager.manageHashtags(hashtags);
+        System.out.println("Unique Hashtags: " + uniqueHashtags);
 
-        for (Student s : students) {
-            s.displayInfo();
-            if (s.isPassing()) {
-                passingCount++;
-            }
-        }
+        ArrayList<String> posts = new ArrayList<>(Arrays.asList("Java Programming Tips", "Advanced Java Tutorial", "Spring Boot Guide"));
+        HashMap<String, Integer> engagementMap = new HashMap<>();
+        engagementMap.put("Java Programming Tips", engagement);
+        engagementMap.put("Advanced Java Tutorial", 800);
+        engagementMap.put("Spring Boot Guide", 1200);
 
-        System.out.println("Summary: " + passingCount + " out of " + students.length + " students are passing.");
+        LinkedList<String> trendingPosts = manager.findTrendingPosts(posts, engagementMap);
+        System.out.println("Trending Posts: " + trendingPosts);
+        HashSet<String> uniqueAuthors = manager.getUniqueAuthors("Alice", "Bob", "Alice", "Charlie", "Bob");
+        System.out.println("Unique Authors: " + uniqueAuthors);
     }
 }
