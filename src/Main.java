@@ -1,68 +1,72 @@
-class Student {
-    String name;
-    int age;
-    String course;
-    double grade1, grade2, grade3;
-
-    // Constructor
-    Student(String name, int age, String course, double grade1, double grade2, double grade3) {
-        this.name = name;
-        this.age = age;
-        this.course = course;
-        this.grade1 = grade1;
-        this.grade2 = grade2;
-        this.grade3 = grade3;
-    }
-
-    // Display student info
-    void displayInfo() {
-        System.out.println("Student Information:");
-        System.out.println("Name: " + name + ", Age: " + age + ", Course: " + course);
-        System.out.printf("Grades: %.1f, %.1f, %.1f\n", grade1, grade2, grade3);
-        System.out.printf("Average: %.2f\n", calculateAverage());
-        System.out.println("Letter Grade: " + getLetterGrade());
-        System.out.println("Status: " + (isPassing() ? "PASSING" : "FAILING"));
-        System.out.println();
-    }
-
-    // Calculate average of grades
-    double calculateAverage() {
-        return (grade1 + grade2 + grade3) / 3;
-    }
-
-    // Return letter grade
-    String getLetterGrade() {
-        double avg = calculateAverage();
-        if (avg >= 90) return "A";
-        else if (avg >= 80) return "B";
-        else if (avg >= 70) return "C";
-        else if (avg >= 60) return "D";
-        else return "F";
-    }
-
-    // Check if passing
-    boolean isPassing() {
-        return calculateAverage() >= 70;
-    }
-}
-
 public class Main {
     public static void main(String[] args) {
-        Student s1 = new Student("Alice", 20, "BSIT", 85.0, 90.0, 88.0);
-        Student s2 = new Student("Bob", 19, "BSCS", 92.0, 95.0, 89.0);
-        Student s3 = new Student("Charlie", 21, "BSIT", 65.0, 70.0, 68.0);
+        try {
+            System.out.println("═══ Food Ordering System ═══");
 
-        Student[] students = {s1, s2, s3};
+            Order order1 = new Order("Alice Johnson");
+            Order order2 = new Order("Bob Smith");
+            Order order3 = new Order("Charlie Brown");
 
-        int passingCount = 0;
+            System.out.println("Creating orders and adding items...");
 
-        for (Student s : students) {
-            s.displayInfo();
-            if (s.isPassing()) {
-                passingCount++;
+            // Alice
+            order1.addItem("Pizza", 8.99);
+            order1.addItem("Burger", 7.50);
+            order1.addItem("Fries", 3.25);
+            System.out.println("Item 'Pizza' added successfully");
+            System.out.println("Items added: Burger, Fries");
+
+            // Bob
+            try {
+                order2.addItem("Burger", -5.50);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
             }
-        }
+            order2.addItem("Fries", 3.25);
+            order2.addItem("Coke", 1.75);
+            order2.addItem("Salad", 4.00);
+            order2.addItem("Water", 1.25);
+            System.out.println("Item 'Burger' added successfully");
+            System.out.println("Items added: Fries, Coke, Salad, Water");
 
-        System.out.println("Summary: " + passingCount + " out of " + students.length + " students are passing.");
+            // Charlie
+            try {
+                order3.addItem("", 2.50);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+            order3.addItem("Pizza", 7.50);
+            order3.addItem("Fries", 2.50);
+            order3.addItem("Soda", 1.50);
+            System.out.println("Item 'Pizza' added successfully");
+            System.out.println("Items added: Fries, Soda");
+
+            System.out.println();
+
+            System.out.println("Order Results:");
+            System.out.println(formatOrder(order1));
+            System.out.println(formatOrder(order2));
+            System.out.println(formatOrder(order3));
+
+            System.out.println();
+
+            System.out.println("Total orders created: " + Order.getTotalOrders());
+
+            Order largestOrder = order1;
+            if (order2.getTotalAmount() > largestOrder.getTotalAmount()) {
+                largestOrder = order2;
+            }
+            if (order3.getTotalAmount() > largestOrder.getTotalAmount()) {
+                largestOrder = order3;
+            }
+
+            System.out.println("Largest order: " + largestOrder.getCustomerName() + " ($" + String.format("%.2f", largestOrder.getTotalAmount()) + ")");
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+        }
+    }
+
+    public static String formatOrder(Order order) {
+        return "Order for " + order.getCustomerName() + ": " + order.getItemCount() + " items, Total: $" + String.format("%.2f", order.getTotalAmount()) + ", Size: " + order.getOrderSize();
     }
 }
