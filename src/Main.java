@@ -1,78 +1,46 @@
 public class Main {
     public static void main(String[] args) {
+        System.out.println("═══ LIBRARY MANAGEMENT SYSTEM ═══");
+
+        // Create LibraryManager
         LibraryManager manager = new LibraryManager();
 
-        Book book1 = new Book("B001", "The Wuxia Way", "L. Author", "ISBN-001", 320, "Fantasy");
-        Book book2 = new Book("B002", "Data Structures", "A. Coder", "ISBN-002", 450, "Education");
-
-        Magazine mag1 = new Magazine("M001", "Science Monthly", "Various", 12, "December", true);
-        Magazine mag2 = new Magazine("M002", "Fashion Weekly", "Various", 45, "June", false);
-
-        DVD dvd1 = new DVD("D001", "Adventure Movie", "Dir. A", 120, "PG-13", "Adventure");
-        DVD dvd2 = new DVD("D002", "Kids Show", "Dir. B", 80, "G", "Kids");
+        System.out.println("\n═══ Adding Items to Library ═══");
+        Book book1 = new Book("B1", "Java Programming", "James Gosling", "123456789", 500, "Programming");
+        Book book2 = new Book("B2", "Mystery Novel", "Agatha Christie", "987654321", 300, "Mystery");
+        Magazine mag1 = new Magazine("M1", "Tech Today", "Editor Smith", 120, "October", true);
+        Magazine mag2 = new Magazine("M2", "Science Weekly", "Editor Doe", 45, "September", false);
+        DVD dvd1 = new DVD("D1", "The Matrix", "Wachowski Sisters", 130, "R", "Sci-Fi");
+        DVD dvd2 = new DVD("D2", "Frozen", "Disney", 102, "PG", "Animation");
 
         manager.addItem(book1);
-        manager.addItem(book2);
         manager.addItem(mag1);
-        manager.addItem(mag2);
         manager.addItem(dvd1);
-        manager.addItem(dvd2);
 
-        Student student = new Student("U001", "Alice", "alice@example.com", "S1001", "Computer Science");
-        Faculty faculty = new Faculty("U002", "Dr. Bob", "bob@example.edu", "Math", "Professor");
-
+        System.out.println("\n═══ Displaying All Items ═══");
         manager.displayAllItems();
-        System.out.println();
 
-        if (student.getBorrowedItemsCount() < student.getMaxBorrowLimit() && manager.borrowItem("B001", student.getName())) {
-            student.addBorrowedItem(book1);
-        }
-        if (student.getBorrowedItemsCount() < student.getMaxBorrowLimit() && manager.borrowItem("D002", student.getName())) {
-            student.addBorrowedItem(dvd2);
-        }
-        // Faculty borrows a magazine and a book
-        if (faculty.getBorrowedItemsCount() < faculty.getMaxBorrowLimit() && manager.borrowItem("M001", faculty.getName())) {
-            faculty.addBorrowedItem(mag1);
-        }
-        if (faculty.getBorrowedItemsCount() < faculty.getMaxBorrowLimit() && manager.borrowItem("B002", faculty.getName())) {
-            faculty.addBorrowedItem(book2);
-        }
-        System.out.println();
-        
+        System.out.println("\n═══ Testing Borrowing ═══");
+        Student student = new Student("U1", "John Smith", "john@email.com", "S123", "Computer Science");
+        Faculty faculty = new Faculty("U2", "Dr. Smith", "smith@email.com", "Engineering", "Professor");
+
+        book1.borrowItem(student.getName());
+        student.addBorrowedItem(book1);
+        System.out.println("Student " + student.getName() + " borrowed: " + book1.title);
+
+        dvd1.borrowItem(faculty.getName());
+        faculty.addBorrowedItem(dvd1);
+        System.out.println("Faculty " + faculty.getName() + " borrowed: " + dvd1.title);
+
+        System.out.println("\n═══ Displaying Available Items ═══");
         manager.displayAvailableItems();
-        System.out.println();
-        
-        student.displayBorrowedItems();
-        faculty.displayBorrowedItems();
-        System.out.println();
-        
-        manager.returnItem("B001");
-        student.removeBorrowedItem(book1);
-        System.out.println();
-        
-        manager.displayAllItems();
-        System.out.println();
-        
-        int daysLate = 3;
-        double totalFees = manager.calculateTotalLateFees(daysLate);
-        System.out.printf("Total late fees for %d days late (all items): %.2f\n", daysLate, totalFees);
-        System.out.println();
-        System.out.println(dvd1.getBorrowingStatus());
-        System.out.println();
-        try {
-            book1.setGenre("");
-        } catch (IllegalArgumentException ex) {
-            System.out.println("Caught validation error when setting genre: " + ex.getMessage());
-        }
-        try {
-            dvd1.setRating("X");
-        } catch (IllegalArgumentException ex) {
-            System.out.println("Caught validation error when setting rating: " + ex.getMessage());
-        }
-        try {
-            mag2.setIssueNumber(-5);
-        } catch (IllegalArgumentException ex) {
-            System.out.println("Caught validation error when setting issue number: " + ex.getMessage());
-        }
+
+        System.out.println("\n═══ Testing Late Fees ═══");
+        System.out.println(book1.title + " - 5 days late: $" + book1.calculateLateFee(5));
+        System.out.println(dvd1.title + " - 3 days late: $" + dvd1.calculateLateFee(3));
+
+        System.out.println("\n═══ Testing User Information ═══");
+        System.out.println("Student: " + student.getName() + " (" + student.getMajor() + ") - " + student.getBorrowedItemsCount() + " items borrowed");
+        System.out.println("Faculty: " + faculty.getName() + " (" + faculty.getDepartment() + ") - " + faculty.getBorrowedItemsCount() + " items borrowed");
     }
 }
