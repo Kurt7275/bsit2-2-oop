@@ -1,68 +1,78 @@
-class Student {
-    String name;
-    int age;
-    String course;
-    double grade1, grade2, grade3;
-
-    // Constructor
-    Student(String name, int age, String course, double grade1, double grade2, double grade3) {
-        this.name = name;
-        this.age = age;
-        this.course = course;
-        this.grade1 = grade1;
-        this.grade2 = grade2;
-        this.grade3 = grade3;
-    }
-
-    // Display student info
-    void displayInfo() {
-        System.out.println("Student Information:");
-        System.out.println("Name: " + name + ", Age: " + age + ", Course: " + course);
-        System.out.printf("Grades: %.1f, %.1f, %.1f\n", grade1, grade2, grade3);
-        System.out.printf("Average: %.2f\n", calculateAverage());
-        System.out.println("Letter Grade: " + getLetterGrade());
-        System.out.println("Status: " + (isPassing() ? "PASSING" : "FAILING"));
-        System.out.println();
-    }
-
-    // Calculate average of grades
-    double calculateAverage() {
-        return (grade1 + grade2 + grade3) / 3;
-    }
-
-    // Return letter grade
-    String getLetterGrade() {
-        double avg = calculateAverage();
-        if (avg >= 90) return "A";
-        else if (avg >= 80) return "B";
-        else if (avg >= 70) return "C";
-        else if (avg >= 60) return "D";
-        else return "F";
-    }
-
-    // Check if passing
-    boolean isPassing() {
-        return calculateAverage() >= 70;
-    }
-}
-
 public class Main {
     public static void main(String[] args) {
-        Student s1 = new Student("Alice", 20, "BSIT", 85.0, 90.0, 88.0);
-        Student s2 = new Student("Bob", 19, "BSCS", 92.0, 95.0, 89.0);
-        Student s3 = new Student("Charlie", 21, "BSIT", 65.0, 70.0, 68.0);
+        LibraryManager manager = new LibraryManager();
 
-        Student[] students = {s1, s2, s3};
+        Book book1 = new Book("B001", "The Wuxia Way", "L. Author", "ISBN-001", 320, "Fantasy");
+        Book book2 = new Book("B002", "Data Structures", "A. Coder", "ISBN-002", 450, "Education");
 
-        int passingCount = 0;
+        Magazine mag1 = new Magazine("M001", "Science Monthly", "Various", 12, "December", true);
+        Magazine mag2 = new Magazine("M002", "Fashion Weekly", "Various", 45, "June", false);
 
-        for (Student s : students) {
-            s.displayInfo();
-            if (s.isPassing()) {
-                passingCount++;
-            }
+        DVD dvd1 = new DVD("D001", "Adventure Movie", "Dir. A", 120, "PG-13", "Adventure");
+        DVD dvd2 = new DVD("D002", "Kids Show", "Dir. B", 80, "G", "Kids");
+
+        manager.addItem(book1);
+        manager.addItem(book2);
+        manager.addItem(mag1);
+        manager.addItem(mag2);
+        manager.addItem(dvd1);
+        manager.addItem(dvd2);
+
+        Student student = new Student("U001", "Alice", "alice@example.com", "S1001", "Computer Science");
+        Faculty faculty = new Faculty("U002", "Dr. Bob", "bob@example.edu", "Math", "Professor");
+
+        manager.displayAllItems();
+        System.out.println();
+
+        if (student.getBorrowedItemsCount() < student.getMaxBorrowLimit() && manager.borrowItem("B001", student.getName())) {
+            student.addBorrowedItem(book1);
         }
-
-        System.out.println("Summary: " + passingCount + " out of " + students.length + " students are passing.");
+        if (student.getBorrowedItemsCount() < student.getMaxBorrowLimit() && manager.borrowItem("D002", student.getName())) {
+            student.addBorrowedItem(dvd2);
+        }
+        // Faculty borrows a magazine and a book
+        if (faculty.getBorrowedItemsCount() < faculty.getMaxBorrowLimit() && manager.borrowItem("M001", faculty.getName())) {
+            faculty.addBorrowedItem(mag1);
+        }
+        if (faculty.getBorrowedItemsCount() < faculty.getMaxBorrowLimit() && manager.borrowItem("B002", faculty.getName())) {
+            faculty.addBorrowedItem(book2);
+        }
+        System.out.println();
+        
+        manager.displayAvailableItems();
+        System.out.println();
+        
+        student.displayBorrowedItems();
+        faculty.displayBorrowedItems();
+        System.out.println();
+        
+        manager.returnItem("B001");
+        student.removeBorrowedItem(book1);
+        System.out.println();
+        
+        manager.displayAllItems();
+        System.out.println();
+        
+        int daysLate = 3;
+        double totalFees = manager.calculateTotalLateFees(daysLate);
+        System.out.printf("Total late fees for %d days late (all items): %.2f\n", daysLate, totalFees);
+        System.out.println();
+        System.out.println(dvd1.getBorrowingStatus());
+        System.out.println();
+        try {
+            book1.setGenre("");
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Caught validation error when setting genre: " + ex.getMessage());
+        }
+        try {
+            dvd1.setRating("X");
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Caught validation error when setting rating: " + ex.getMessage());
+        }
+        try {
+            mag2.setIssueNumber(-5);
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Caught validation error when setting issue number: " + ex.getMessage());
+        }
     }
 }
